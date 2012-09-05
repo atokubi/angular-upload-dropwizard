@@ -1,28 +1,62 @@
 <!doctype html>
 <html ng-app="user-app">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Simple Image Upload Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Adam Parrish">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/attachment.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
 
 
-<body ng-controller="UserController">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/lib/bootstrap/html5.js"></script>
+    <![endif]-->
 
-<form>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+</head>
 
-    <fieldset>
-        <label>First name: <input type="text" ng-model="user.firstName"></label>
-        <label>Last name: <input type="text" ng-model="user.lastName"></label>
-        <label>Email: <input type="text" ng-model="user.email"></label>
-    </fieldset>
+<body>
+ <div class="container">
+    <div class="row span10" style="margin: 0px; padding-bottom: 10px" ng-controller="AttachmentController">
+        <div class="span2" style="margin: 0px; ">
+            <div style="float: left;">
+                <div id="dropbox" ng-class="dropbox">
+                    <div file-button>
+                        <button class='btn btn-success btn-large'><i class="icon-camera"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="files.length" class="span4">
+            <button class='btn' ng-click="deleteCurrentAttachment()"><i class="icon-remove-circle"></i></button>
+            <div ng-repeat="file in files">
+                <span>{{file.webkitRelativePath || file.name}}</span>
+            </div>
+        </div>
+    </div>
+ </div>
 
-    <button ng-click="saveUser()">Save</button>
-    <button ng-click="deleteUser()">Delete</button>
-    <button ng-click="newUser()">New User</button>
-</form>
 
-<div ng-repeat="user in users">
-    <a ng-click="editUser(user)">{{user.firstName}} {{user.lastName}} {{user.email}}</a>
-</div>
-
-<script src="js/lib/angular-1.0.1/angular-1.0.1.js"></script>
-<script src="js/lib/angular-1.0.1/angular-resource-1.0.1.js"></script>
+    <script src="js/lib/angular-1.0.1/angular-1.0.1.js"></script>
+    <script src="js/lib/angular-1.0.1/angular-resource-1.0.1.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
