@@ -1,1 +1,0 @@
-angular-1.0.0rc8/angular-1.0.0rc8.js
