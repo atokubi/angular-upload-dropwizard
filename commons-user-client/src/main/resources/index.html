@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="user-app">
+<html ng-app="upload-app">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -34,33 +34,33 @@
 </head>
 
 <body>
- <div class="container">
-    <div class="row span10" style="margin: 0px; padding-bottom: 10px" ng-controller="AttachmentController">
-        <div class="span2" style="margin: 0px; ">
-            <div style="float: left;">
-                <div id="dropbox" ng-class="dropbox">
-                    <div file-button>
-                        <button class='btn btn-success btn-large'><i class="icon-camera"></i></button>
+     <div class="container">
+        <div class="row span10" style="margin: 0px; padding-bottom: 10px" ng-controller="AttachmentController">
+            <div class="span2" style="margin: 0px; ">
+                <div style="float: left;">
+                    <div id="dropbox" ng-class="dropbox">
+                        <div file-button>
+                            <button class='btn btn-success btn-large'><i class="icon-camera"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div ng-show="files.length" class="span4">
-            <button class='btn' ng-click="deleteCurrentAttachment()"><i class="icon-remove-circle"></i></button>
-            <div ng-repeat="file in files">
-                <span>{{file.webkitRelativePath || file.name}}</span>
+            <div ng-show="files.length" class="span4">
+                <button class='btn' ng-click="deleteCurrentAttachment()"><i class="icon-remove-circle"></i></button>
+                <div ng-repeat="file in files">
+                    <span>{{file.webkitRelativePath || file.name}}</span>
+                </div>
             </div>
         </div>
-    </div>
- </div>
+     </div>
 
 
     <script src="js/lib/angular-1.0.1/angular-1.0.1.js"></script>
     <script src="js/lib/angular-1.0.1/angular-resource-1.0.1.js"></script>
 
-<script src="js/app.js"></script>
-<script src="js/services.js"></script>
-<script src="js/controller1.0.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controller1.0.js"></script>
 
 </body>
 

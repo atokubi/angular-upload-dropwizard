@@ -1,74 +1,70 @@
-function UserController($scope, $resource) {
+function AttachmentController($scope) {
+  var dropbox = document.getElementById("dropbox")
+  $scope.files = [];
 
-    $scope.user = {
-        firstName: '',
-        lastName: '',
-        email: ''
-    };
+  function onDropboxChange(evt) {
+    var input = document.getElementById("uploadInput")
+    console.log("input contents change");
 
-    var User = $resource('/backend/user/:userId',
-        null,
-        {'remove': {method:'DELETE', params: {userId: '@id'}, isArray:false},
-         'update': {method:'PUT', params: {userId: '@id'}, isArray:false}
-          } );
-
-    $scope.users = {};
-
-    var self = $scope;
-    self.loadUsers = function() {
-
-        $scope.users = User.query();
-
-    }
-
-    self.saveUser = function()
-    {
-        if( $scope.user.id == null )
-        {
-            User.save( $scope.user, function(){
-                $scope.loadUsers();
-                $scope.newUser();
-            }, function() {
-                console.log('error');
-            } );
+    var files = input.files;
+    if (files.length > 0) {
+      $scope.$apply(function () {
+        $scope.files = [];
+        for (var i = 0; i < files.length; i++) {
+          $scope.files.push(files[i]);
         }
-        else
-        {
-            User.update({userId: $scope.user.id}, $scope.user, function(){
-                $scope.loadUsers();
-            }, function() {
-                console.log('error');
-            } );
-        }
+      })
     }
 
-    self.editUser = function( user )
-    {
-        $scope.user = user;
-        console.log("user.id=" + user.id);
-        console.log("user=" + user);
+    var fd = new FormData()
+    for (var i in $scope.files) {
+      fd.append("file", $scope.files[i]);
     }
+    var xhr = new XMLHttpRequest()
+    xhr.upload.addEventListener("progress", uploadProgress, false);
+    xhr.addEventListener("load", uploadComplete, false);
+    xhr.addEventListener("error", uploadFailed, false);
+    xhr.addEventListener("abort", uploadCanceled, false);
+    xhr.open("POST", "/backend/uploadattachment/");
+    $scope.progressVisible = true
+    xhr.send(fd)
 
-    self.deleteUser = function( )
-    {
-        User.delete({userId:$scope.user.id}, function() {
-            $scope.loadUsers();
-            $scope.user = {
-                firstName: '',
-                lastName: '',
-                email: ''
-            }
-        })
-    }
+  }
 
-    self.newUser = function()
-    {
-        $scope.user = {
-            firstName: '',
-            lastName: '',
-            email: ''
-        }
-    }
+  dropbox.addEventListener("change", onDropboxChange, false);
 
-    self.loadUsers();
+  function uploadProgress(evt) {
+    $scope.$apply(function () {
+      if (evt.lengthComputable) {
+        $scope.progress = Math.round(evt.loaded * 100 / evt.total)
+      } else {
+        $scope.progress = 'unable to compute'
+      }
+    })
+  }
+
+  function uploadComplete(evt) {
+    broadCastService.attachmentSuccess(JSON.parse(evt.target.responseText));
+  }
+
+  function uploadFailed(evt) {
+    alert("There was an error attempting to upload the file.")
+  }
+
+  function uploadCanceled(evt) {
+    $scope.$apply(function () {
+      $scope.progressVisible = false
+    })
+    alert("The upload has been canceled by the user or the browser dropped the connection.")
+  }
+
+  $scope.deleteCurrentAttachment = function() {
+    broadCastService.deleteAttachment();
+  }
+
+  $scope.$on("deleteAttachmentSuccess", function() {
+    $scope.files = [];
+  })
 }
+
+AttachmentController.$inject = ['$scope'];

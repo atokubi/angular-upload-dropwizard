@@ -1,1 +1,1 @@
-angular.module('user-app.services', ['ngResource'])
+angular.module('upload-app.services', ['ngResource'])
