@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.neosavvy</groupId>
-    <artifactId>commons-user</artifactId>
+    <artifactId>file-upload</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Commons User With Dropwizard</name>
-    <url>http://maven.apache.org</url>
+    <name>Angular and Dropdwizard File Upload Example</name>
+    <url>http://blog.neosavvy.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +26,14 @@
             <name>org.clapper Maven Repo</name>
             <url>http://maven.clapper.org/</url>
             <layout>default</layout>
+        </repository>
+        <repository>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <id>central</id>
+            <name>Neosavvy Maven Repository</name>
+            <url>http://nexus.neosavvy.com/nexus/content/groups/public</url>
         </repository>
     </repositories>
 
@@ -49,7 +57,7 @@
         </pluginManagement>
     </build>
     <modules>
-        <module>commons-user-service</module>
-        <module>commons-user-client</module>
+        <module>file-upload-service</module>
+        <module>file-upload-client</module>
     </modules>
 </project>

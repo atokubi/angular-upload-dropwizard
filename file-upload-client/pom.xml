@@ -3,24 +3,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>commons-user</artifactId>
+    <artifactId>file-upload</artifactId>
     <groupId>com.neosavvy</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>com.neosavvy</groupId>
-  <artifactId>commons-user-client</artifactId>
+  <artifactId>file-upload-client</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Commons User Client</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <properties>
+  <name>Angular File Upload Client</name>
+  <url>http://blog.neosavvy.com</url>
+
+    <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>
