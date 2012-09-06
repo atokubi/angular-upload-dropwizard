@@ -1,1 +1,4 @@
 *.iml
+target
+file-upload-service/target
+file-upload-client/target
