@@ -47,17 +47,18 @@ public class AttachmentResource {
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) {
 
-        String uploadedFileLocation = "";
         final Attachment attachment;
 
         try {
 
-            ensureParentDirectory(uploadedFileLocation);
+            String uploadedFileLocation = "";
+
+            ensureParentDirectory(uploadDirectory);
 
             uploadedFileLocation = fileDetail.getFileName().toLowerCase();
 
             // save it
-            String uploadedFileLocationToWrite = uploadedFileLocation + uploadedFileLocation;
+            String uploadedFileLocationToWrite = uploadDirectory + uploadedFileLocation;
             writeToFile(uploadedInputStream, uploadedFileLocationToWrite);
 
         } catch (WebApplicationException e) {
